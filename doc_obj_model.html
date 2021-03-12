@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="data:;base64,=">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <ul id='myList'></ul>  
+
+    <input type="button" value="Change this document." onclick="change()">
+    <h2>Header</h2>
+    <p>Paragraph</p>
+
+    <script>
+        function change() {
+        // document.getElementsByTagName("H2") returns a NodeList of the <h2>
+        // elements in the document, and the first is number 0:
+
+        var header = document.getElementsByTagName("H2").item(0);
+        // the firstChild of the header is a Text node:
+        header.firstChild.data = "A dynamic document";
+        // now the header is "A dynamic document".
+
+        var para = document.getElementsByTagName("P").item(0);
+        para.firstChild.data = "This is the first paragraph.";
+
+        // create a new Text node for the second paragraph
+        var newText = document.createTextNode("This is the second paragraph.");
+        // create a new Element to be the second paragraph
+        var newElement = document.createElement("P");
+        // put the text in the paragraph
+        newElement.appendChild(newText);
+        // and put the paragraph on the end of the document by appending it to
+        // the BODY (which is the parent of para)
+        para.parentNode.appendChild(newElement);
+    }
+        const ul = document.getElementById('myList');
+        const items = ["item1", "item2", "item3"]
+
+        for (x of items){
+            li = document.createElement("li")
+            li.appendChild(document.createTextNode(x))
+            ul.appendChild(li)
+        }
+        var li = document.getElementById("myList")
+        console.log(li.textContent || li.innerText);
+
+    </script>
+    
+</body>
+</html>
