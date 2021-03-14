@@ -18,25 +18,24 @@ class Bubble {
   }
 }
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-async function Run() {
-  for (let i = 1; i <300 ; i++) {        
-    await sleep(300);
-
-    const context = canvas.getContext('2d');
-    context.clearRect(0, 0, canvas.width, canvas.height);
+function doSetInterval(i) {
+    function run() {
+        const context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        
+        let rx1 = 120 + Math.random(-i, i)* 60*Math.sin(i);
+        let ry1 = 100 + Math.random(-i, i)* 80*Math.cos(i);
+        let bubble1 = new Bubble(rx1, ry1, 'red', 10);
+        bubble1.draw();
     
-    let rx1 = 120 + Math.random(-i, i)* 60*Math.sin(i);
-    let ry1 = 100 + Math.random(-i, i)* 80*Math.cos(i);
-    let bubble1 = new Bubble(rx1, ry1, 'red', 10);
-    bubble1.draw();
+        let rx2 = 100+Math.random(-i, i)* 80*Math.cos(i);
+        let ry2 = 120+Math.random(-i, i)* 50*Math.sin(i);
+        let bubble2 = new Bubble(rx2, ry2, 'green', 10);
+        bubble2.draw();
+    }
 
-    let rx2 = 100+Math.random(-i, i)* 80*Math.cos(i);
-    let ry2 = 120+Math.random(-i, i)* 50*Math.sin(i);
-    let bubble2 = new Bubble(rx2, ry2, 'green', 10);
-    bubble2.draw();
+    setInterval(run, 300);
   }
-}
-Run()
+  
+  for (var i = 1; i <= 20; i++)
+    doSetInterval(i);
